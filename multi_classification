@@ -1,0 +1,40 @@
+!pip install -Uqq fastbook
+
+import fastbook
+from fastbook import *
+from fastai.vision.all import *
+
+dest = '/content/DataML'
+path = untar_data(URLs.PETS, data=dest)/'images'
+def is_cat(x): return x[0].isupper()
+
+dls = ImageDataLoaders.from_name_func(path=path, fnames=get_image_files(path), valid_pct=0.2, seed=42, label_func=is_cat, item_tfms=Resize(224))
+
+learn = cnn_learner(dls, resnet34, metrics=error_rate)
+
+import fastbook
+from fastbook import *
+from fastai.vision.all import *
+
+dest = '/content/DataML'
+path = untar_data(URLs.PETS, data=dest)/'images'
+def is_cat(x): return x[0].isupper()
+
+dls = ImageDataLoaders.from_name_func(path=path, fnames=get_image_files(path), valid_pct=0.2, seed=42, label_func=is_cat, item_tfms=Resize(224))
+
+import shutil
+def categorize_files(input_path, dest_path):
+  if not os.path.exists(dest_path):
+    os.mkdir(dest_path)
+    os.mkdir(dest_path / 'Dog')
+    os.mkdir(dest_path)
+    os.mkdir(dest_path / 'cat')
+    os.mkdir(dest_path / 'keanu')
+  files = input_path.ls()
+  for i in range(len(files)):
+    if files[i].name[0].isupper():
+      shutil.copy(files[i], dest_path/'Cat'/files[i].name)
+    else:
+      shutil.copy(files[i], dest_path/'Dog'/files[i].name)
+      
+  
