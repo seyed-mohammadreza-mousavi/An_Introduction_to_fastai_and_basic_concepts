@@ -1,3 +1,4 @@
+##########################################BINARY CLASSIFICATION##########################################
 # First you have to install fastbook
 # For google.colab we have:
 !pip install -Uqq fastbook
